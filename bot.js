@@ -28,7 +28,7 @@ client.on("message",async message => {
   .addField(`:calendar:  تاريخ الانشاء:`, `${moment(message.guild.createdAt).format(`D/M/YYYY h:mm`)} \n ${moment(message.guild.createdAt).locale("EN-nw").fromNow()}`,true)
   .addField(`:crown: مملوك بواسطة`, `${message.guild.owner.user.toString()}`,true) 
   .addField(`:busts_in_silhouette: الأعضاء  [${message.guild.members.size}]`, `**${message.guild.members.filter(c => c.presence.status !== "offline").size}** Online`, true)
-  .addField(`:speech_balloon: الرومات [${message.guild.channels.size}]`,`**${message.guild.channels.filter(f => f.type === "text").size}** كتابي | **${message.guild.channels.filter(f => f.type === "voice").size}** `,true)
+  .addField(`:speech_balloon: الرومات [${message.guild.channels.size}]`,`**${message.guild.channels.filter(f => f.type === "text").size}** كتابي | **${message.guild.channels.filter(f => f.type === "voice").size}** صوتي `,true)
   .addField(`:earth_africa: أخرى`, `**المنطقة:** ${message.guild.region} \n **مستوى التحقق:** ${message.guild.verificationLevel}`, true)  
   .addField(`:closed_lock_with_key:  عدد الرولات [${message.guild.roles.size}]`, `To see the whole list with all roles use **${prefix}roles**`, true) 
   .setColor(`black`)
