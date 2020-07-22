@@ -882,6 +882,7 @@ if (msg.content === prefix + "Vip tag") {
 		   const embed = new Discord.RichEmbed() 
 .setTitle('Vip')
 .setColor("RED")
+.addField(" ${user} ban")
 .setDescription('2222 , ${user} ');
  msg.channel.send(embed);
 }}
