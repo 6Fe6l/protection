@@ -876,48 +876,24 @@ client.on('message', message => {
  });
 
 
-client.on('message', message => {
-  if (message.content == prefix + "help") { 
-    if(!message.channel.guild) return message.reply('**This command only for servers.**');
-    var embed = new Discord.RichEmbed()
-    .setTitle("**Commands D e vBot :**")
-    .setColor('#dbff00')
-    .setImage(message.guild.iconURL)
-    .setThumbnail("https://media.discordapp.net/attachments/718901160064319559/719927503052865646/image0.jpg")
-    .setDescription(`**${prefix}ping**   -   معرفة البنق
-      **${prefix}server**   -  اظهار معلومات السيرفر
-      **${prefix}botinfo**  -  معرفة معلومات البوت    
-      **${prefix}kick**     -  طرد شخص من السيرفر
-      **${prefix}ban**      -  باند شخص من السيرفر
-رابط البوت
-      **for help developers :** <@384835284556185602> <@546034287133065216> `)
-  message.channel.send(":white_check_mark: **Check you private.**")
-  message.author.send(embed)
-  }
-});
-
 
 
 client.on('message', message => {
-  if(message.content.startsWith(prefix + 'role')) {
+  if(message.content.startsWith(prefix + 'bans')) {
       if(!message.member.hasPermission('MANAGE_ROLES')) return
     let role = new Discord.RichEmbed()
-  .setDescription(`
- **Command: role**
-
-Add/remove a user to a role or roles.
-Aliases:
-$role, رول, #رول
-
-**Usage:**
-$role (user) (+/-)(roles names separated by comma)
-$role all (+/-)(role name)
-
-**Examples:**
-$role ${user} Admin
-$role all members
-$role bots System
-$role humans members`)
+.setTitle(“coomand”)
+.addField("حظر العضو.
+الأختصارات:
+#حظر
+الاستخدام:
+#ban (العضو) (الوقت : m/h/d/mo/y) (السبب)
+أمثله للأمر:
+#ban ${user}
+#ban ${user} سبام
+#ban @dominant.#8887 1h سبام
+#ban @dominant.#8887 1d سبام
+#ban @dominant.#8887 1w")
   .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 message.channel.sendEmbed(role)
   }})
