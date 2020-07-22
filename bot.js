@@ -878,28 +878,3 @@ client.on('message', message => {
 
 
 
-client.on("ready" , () => {
-    client.guilds.forEach(g => {
-        db.collection('botguildsinfo').doc(g.id).set({
-            prefix : "yourbotprefix"
-        });
-    });
-});
-
-client.on('message', message => {
-    if(message.author.bot || !message.guild) {
-        return
-    }
-    if(message.content.startsWith(prefix + "setprefix")) {
-        var args = message.content.split(" ").slice(1)
-        if(args.length === null) return
-
-        if(args) {
-            db.collection("botguildsinfo").doc(message.guild.id).update({
-                prefix : args[0]
-            }).then(() =>{
-                message.channel.send(`prefix set to ${args[0]}`);
-            });
-        }
-    }
-});
