@@ -3,6 +3,7 @@ const myid = ['287898437058560000'];
 const prefix = ['$'];
 const cmd = require("node-cmd")
 const client = new Discord.Client();
+const arraySort = require('array-sort');
 const Enmap = require("enmap")
 const Canvas = require('canvas')
 const moment = require("moment");
@@ -877,4 +878,107 @@ client.on('message', message => {
  });
 
 
+client.on("message", message => {
+    var args = message.content.substring(prefix.length).split(" ");
+    if (message.content.startsWith("مسح")) { 
+        if(!message.channel.guild) return message.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');         
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return;
+var msg;
+msg = parseInt();
 
+message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+message.channel.sendMessage("", {embed: {
+title: "تــم مسح الشات",
+color: 0x06DF00,
+footer: {
+  
+}
+}}).then(msg => {msg.delete(3000)});
+                  }
+
+
+});
+
+
+
+
+
+client.on('message' , message => {
+if(message.content === (prefix + 'voice')) {
+    message.channel.send(`**عدد الاشخاص الموجودين بـ  الرومات الصوتيه : ${message.guild.members.filter(g => g.voiceChannel).size}**`);
+}
+});
+
+
+
+
+client.on("message", message => {
+	var args = message.content.split(' ').slice(1); 
+	var msg = message.content.toLowerCase();
+	if( !message.guild ) return;
+	if( !msg.startsWith( prefix + 'role' ) ) return;
+	if(!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send('لاتمتلك صلاحية');
+	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
+		if( !args[0] ) return message.reply( 'منشن شخص' );
+		if( !args[1] ) return message.reply( 'اكتب اسم الرتبة' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
+		if( !role1 ) return message.reply( 'اكتب اسم الرتبة' );if( message.mentions.members.first() ){
+			message.mentions.members.first().removeRole( role1 );
+			return message.reply('تم اعطائه الرتبة');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.removeRole( role1 ))
+			return	message.reply(''+role1.name+' ]تم ازاله الرتبة من الجميع');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('[ '+role1.name+' ]تم ازاله الرتبة من البوتات');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('[ '+role1.name+' ] تم ازاله الرتبة من الاعضاء');
+		} 	
+	} else {
+		if( !args[0] ) return message.reply( 'منشن شخص' );
+		if( !args[1] ) return message.reply( 'اكتب اسم الرتبة' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
+		if( !role1 ) return message.reply( 'اكتب اسم الرتبة' );if( message.mentions.members.first() ){
+			message.mentions.members.first().addRole( role1 );
+			return message.reply('تم اعطائه الرتبة');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.addRole( role1 ))
+			return	message.reply('[ '+role1.name+' ] تم اعطاء الكل رتبة');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('[ '+role1.name+' ] تم اعطاء البوتات رتبة');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('[ '+role1.name+' ] تم اعطاء كل الاعضاء رتبة');
+		} 
+	} 
+});
+
+
+
+client.on('message' , async (message) => {
+    if(message.content.startsWith(prefix + "توب رابط")) {
+
+  let invites = await message.guild.fetchInvites();
+
+    invites = invites.array();
+
+    arraySort(invites, 'uses', { reverse: true });
+
+    let possibleInvites = [['User', 'Uses']];
+    invites.forEach(i => {
+      possibleInvites.push([i.inviter.username , i.uses]);
+    })
+    const embed = new Discord.RichEmbed()
+    .setColor(0x7289da)
+    .setTitle("دعوات السيرفر")
+    .addField(' المتصدرين' , `\`\`\`${table.table(possibleInvites)}\`\`\``)
+
+    message.channel.send(embed)
+    }
+});
