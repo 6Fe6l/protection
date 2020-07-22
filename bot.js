@@ -24,13 +24,13 @@ client.login(process.env.TOKEN);
 client.on("message",async message => {
   if (message.content === "$server") {
   let embed = new Discord.RichEmbed()
-  .addField(`:id: Server ID:`, `${message.guild.id}`, true)
-  .addField(`:calendar: Created on:`, `${moment(message.guild.createdAt).format(`D/M/YYYY h:mm`)} \n ${moment(message.guild.createdAt).locale("EN-nw").fromNow()}`,true)
-  .addField(`:crown: Owned by`, `${message.guild.owner.user.toString()}`,true) 
-  .addField(`:busts_in_silhouette: Members [${message.guild.members.size}]`, `**${message.guild.members.filter(c => c.presence.status !== "offline").size}** Online`, true)
-  .addField(`:speech_balloon: Channels [${message.guild.channels.size}]`,`**${message.guild.channels.filter(f => f.type === "text").size}** Text | **${message.guild.channels.filter(f => f.type === "صوتي").size}** `,true)
-  .addField(`:earth_africa: Others`, `**Region:** ${message.guild.region} \n **Verification level:** ${message.guild.verificationLevel}`, true)  
-  .addField(`:closed_lock_with_key: Roles [${message.guild.roles.size}]`, `To see the whole list with all roles use **${prefix}roles**`, true) 
+  .addField(`:id: ايدي السيرفر:`, `${message.guild.id}`, true)
+  .addField(`:calendar:  تاريخ الانشاء:`, `${moment(message.guild.createdAt).format(`D/M/YYYY h:mm`)} \n ${moment(message.guild.createdAt).locale("EN-nw").fromNow()}`,true)
+  .addField(`:crown: مملوك بواسطة`, `${message.guild.owner.user.toString()}`,true) 
+  .addField(`:busts_in_silhouette: الأعضاء  [${message.guild.members.size}]`, `**${message.guild.members.filter(c => c.presence.status !== "offline").size}** Online`, true)
+  .addField(`:speech_balloon: الرومات [${message.guild.channels.size}]`,`**${message.guild.channels.filter(f => f.type === "text").size}** كتابي | **${message.guild.channels.filter(f => f.type === "voice").size}** `,true)
+  .addField(`:earth_africa: أخرى`, `**المنطقة:** ${message.guild.region} \n **مستوى التحقق:** ${message.guild.verificationLevel}`, true)  
+  .addField(`:closed_lock_with_key:  عدد الرولات [${message.guild.roles.size}]`, `To see the whole list with all roles use **${prefix}roles**`, true) 
   .setColor(`black`)
   .setAuthor(`${message.guild.name}`, `${message.guild.iconURL || client.user.avatarURL}`);
   message.channel.send(embed);
