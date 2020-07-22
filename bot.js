@@ -961,24 +961,20 @@ client.on("message", message => {
 
 
 
-client.on('message' , async (message) => {
-    if(message.content.startsWith(prefix + "توب رابط")) {
 
-  let invites = await message.guild.fetchInvites();
 
-    invites = invites.array();
+client.on('message', message => {
+  if (!message.guild) return;
 
-    arraySort(invites, 'uses', { reverse: true });
-
-    let possibleInvites = [['User', 'Uses']];
-    invites.forEach(i => {
-      possibleInvites.push([i.inviter.username , i.uses]);
-    })
-    const embed = new Discord.RichEmbed()
-    .setColor(0x7289da)
-    .setTitle("دعوات السيرفر")
-    .addField(' المتصدرين' , `\`\`\`${table.table(possibleInvites)}\`\`\``)
-
-    message.channel.send(embed)
+  if (message.content === 'join') {
+    if (message.member.voiceChannel) {
+      message.member.voiceChannel.join()
+        .then(connection => { 
+          message.reply('لقد دخلت الروم بنجاح !');
+        })
+        .catch(console.log);
+    } else {
+      message.reply('يجب ان تكون في روم صوتي');
     }
+  }
 });
