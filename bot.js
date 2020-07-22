@@ -30,7 +30,7 @@ client.on("message",async message => {
   .addField(`:busts_in_silhouette: الأعضاء  [${message.guild.members.size}]`, `**${message.guild.members.filter(c => c.presence.status !== "offline").size}** Online`, true)
   .addField(`:speech_balloon: الرومات [${message.guild.channels.size}]`,`**${message.guild.channels.filter(f => f.type === "text").size}** كتابي | **${message.guild.channels.filter(f => f.type === "voice").size}** صوتي `,true)
   .addField(`:earth_africa: أخرى`, `**المنطقة:** ${message.guild.region} \n **مستوى التحقق:** ${message.guild.verificationLevel}`, true)  
-  .addField(`:closed_lock_with_key:  عدد الرولات [${message.guild.roles.size}]`, `To see the whole list with all roles use **${prefix}roles**`, true) 
+  .addField(`:closed_lock_with_key:  عدد الرولات [${message.guild.roles.size}]`, `لرؤية جميع الرتب إستخدم **${prefix}roles**`, true) 
   .setColor(`black`)
   .setAuthor(`${message.guild.name}`, `${message.guild.iconURL || client.user.avatarURL}`);
   message.channel.send(embed);
@@ -874,3 +874,50 @@ client.on('message', message => {
       message.delete(2500);
  }
  });
+
+
+client.on('message', message => {
+  if (message.content == prefix + "help") { 
+    if(!message.channel.guild) return message.reply('**This command only for servers.**');
+    var embed = new Discord.RichEmbed()
+    .setTitle("**Commands D e vBot :**")
+    .setColor('#dbff00')
+    .setImage(message.guild.iconURL)
+    .setThumbnail("https://media.discordapp.net/attachments/718901160064319559/719927503052865646/image0.jpg")
+    .setDescription(`**${prefix}ping**   -   معرفة البنق
+      **${prefix}server**   -  اظهار معلومات السيرفر
+      **${prefix}botinfo**  -  معرفة معلومات البوت    
+      **${prefix}kick**     -  طرد شخص من السيرفر
+      **${prefix}ban**      -  باند شخص من السيرفر
+رابط البوت
+      **for help developers :** <@384835284556185602> <@546034287133065216> `)
+  message.channel.send(":white_check_mark: **Check you private.**")
+  message.author.send(embed)
+  }
+});
+
+
+
+client.on('message', message => {
+  if(message.content.startsWith(prefix + 'role')) {
+      if(!message.member.hasPermission('MANAGE_ROLES')) return
+    let role = new Discord.RichEmbed()
+  .setDescription(`
+ **Command: role**
+
+Add/remove a user to a role or roles.
+Aliases:
+$role, رول, #رول
+
+**Usage:**
+$role (user) (+/-)(roles names separated by comma)
+$role all (+/-)(role name)
+
+**Examples:**
+$role ${user} Admin
+$role all members
+$role bots System
+$role humans members`)
+  .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+message.channel.sendEmbed(role)
+  }})
