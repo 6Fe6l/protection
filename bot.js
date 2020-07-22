@@ -883,7 +883,6 @@ if (msg.content === prefix + "Vip tag") {
 .setTitle('Vip')
 .setColor("RED")
 .addField(' ${user} ban')
-.setDescription('2222 , ${user} ');
  msg.channel.send(embed);
 }}
 );
