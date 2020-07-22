@@ -897,3 +897,27 @@ client.on('message', message => {
   .setFooter('Requested by '+message.author.username, message.author.avatarURL)
 message.channel.sendEmbed(role)
   }})
+
+
+
+client.on('message', message => {
+  if (message.content == prefix + "help") { 
+    if(!message.channel.guild) return message.reply('**This command only for servers.**');
+    var embed = new Discord.RichEmbed()
+    .setTitle("**Commands D e vBot :**")
+    .setColor('#dbff00')
+.addField(`حظر العضو.
+الأختصارات:
+#حظر
+الاستخدام:
+#ban (العضو) (الوقت : m/h/d/mo/y) (السبب)
+أمثله للأمر:
+#ban ${user}
+#ban ${user} سبام
+#ban @dominant.#8887 1h سبام
+#ban @dominant.#8887 1d سبام
+#ban @dominant.#8887 1w`)
+  message.channel.send(":white_check_mark: **Check you private.**")
+  message.author.send(embed)
+  }
+});
