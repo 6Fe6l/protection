@@ -877,27 +877,13 @@ client.on('message', message => {
 
 
 
-
-
-client.on('message', message => {
-  if (message.content == prefix + "help") { 
-    if(!message.channel.guild) return message.reply('**This command only for servers.**');
-    var embed = new Discord.RichEmbed()
-    .setTitle("**Commands D e vBot :**")
-    .setColor('#dbff00')
-    .setImage(message.guild.iconURL)
-    .setThumbnail("https://media.discordapp.net/attachments/718901160064319559/719927503052865646/image0.jpg")
-    .setDescription(`**${prefix}ping**   -   معرفة البنق
-      **${user} server**   -  اظهار معلومات السيرفر
-      **${prefix}botinfo**  -  معرفة معلومات البوت    
-      **${prefix}kick**     -  طرد شخص من السيرفر
-      **${prefix}ban**      -  باند شخص من السيرفر
-رابط البوت
-      **for help developers :** <@384835284556185602> <@546034287133065216> `)
-  message.channel.send(":white_check_mark: **Check you private.**")
-  message.author.send(embed)
-  }
-});
-
-
+client.on ("message", msg => {
+if (msg.content === prefix + "Vip tag") {
+		   const embed = new Discord.RichEmbed() 
+.setTitle('Vip')
+.setColor("RED")
+.setDescription('2222 , ${user} ');
+ msg.channel.send(embed);
+}}
+);
 
