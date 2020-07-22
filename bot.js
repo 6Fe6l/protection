@@ -57,7 +57,8 @@ client.on("message",async message => {
       if(message.guild.member(user.user).highestRole.position >= message.guild.member(message.member).highestRole.position) return message.channel.send(`🙄 **-  You can't ban @${user.user.username}**`);
      if(message.guild.member(user.user).highestRole.position >= message.guild.member(client.user).highestRole.position) return message.channel.send(`🙄 **-  I can't ban @${user.user.username}**`);
       if(message.guild.member(user.user).hasPermission('MANAGE_GUILD') || user.user.id == message.guild.owner.id) return message.channel.send(`🙄 **-  You can't ban @${user.user.username}**`);
-     if(!message.guild.member(user.user).bannable) return message.channel.send(`**🙄 - I couldn't ban that user. Please check my permissions and role position.**`);
+     if(!message.guild.member(user.user).bannable) return message.channel.send(`**🙄 - I couldn't ban that user. Please 
+my permissions and role position.**`);
       message.guild.member(user).ban(user);
       message.channel.send(`**✅ ${user.user.username} banned from the server! ✈**`)
     }
@@ -877,13 +878,28 @@ client.on('message', message => {
 
 
 
-client.on ("message", msg => {
-if (msg.content === prefix + "Vip tag") {
-		   const embed = new Discord.RichEmbed() 
-.setTitle('Vip')
-.setColor("RED")
-.addField(' ${user} ban')
- msg.channel.send(embed);
-}}
-);
+client.on("ready" , () => {
+    client.guilds.forEach(g => {
+        db.collection('botguildsinfo').doc(g.id).set({
+            prefix : "yourbotprefix"
+        });
+    });
+});
 
+client.on('message', message => {
+    if(message.author.bot || !message.guild) {
+        return
+    }
+    if(message.content.startsWith(prefix + "setprefix")) {
+        var args = message.content.split(" ").slice(1)
+        if(args.length === null) return
+
+        if(args) {
+            db.collection("botguildsinfo").doc(message.guild.id).update({
+                prefix : args[0]
+            }).then(() =>{
+                message.channel.send(`prefix set to ${args[0]}`);
+            });
+        }
+    }
+});
