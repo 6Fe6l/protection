@@ -906,7 +906,7 @@ client.on('message', message => {
     var embed = new Discord.RichEmbed()
     .setTitle("**Commands D e vBot :**")
     .setColor('#dbff00')
-.addField(`حظر العضو.
+.addField("حظر العضو.
 الأختصارات:
 #حظر
 الاستخدام:
@@ -916,7 +916,7 @@ client.on('message', message => {
 #ban ${user} سبام
 #ban @dominant.#8887 1h سبام
 #ban @dominant.#8887 1d سبام
-#ban @dominant.#8887 1w`)
+#ban @dominant.#8887 1w")
   message.channel.send(":white_check_mark: **Check you private.**")
   message.author.send(embed)
   }
