@@ -24,104 +24,20 @@ client.login(process.env.TOKEN);
 
 
 
-client.on("message", async message => {
-  
-  if (message.content.toLowerCase() === prefix + "profile") {
-        message.channel.startTyping();
-    setTimeout(() => {
-      message.channel.stopTyping();
-    }, Math.random() * (1 - 3) + 1 * 1000).then(
-         message.channel.send({
-        files: [
-          {
-            name: "prfoilebycutie.png",
-            attachment: `https://api.probot.io/profile/${message.author.id}` 
-          }
-          
-        ]
-      }) 
-      )
-    }
-});
-
-
-
-client.on("message", message => {
-  if (message.content === prefix + "bots") {
-    var list_all = [];
-    message.guild.members.forEach(bb => {
-      if (!bb.user.bot) return;
-      list_all.push(`<@${bb.user.id}>`);
-    });
-    message.channel.send(list_all.join(", "));
-  }
-});
 
 
 
 
 
 
-client.on('message', message => { 
-           if (message.content.startsWith(prefix + "id")) {
-     var args = message.content.split(" ").slice(1);
-     let user = message.mentions.users.first();
-     var men = message.mentions.users.first();
-        var heg;
-        if(men) {
-            heg = men
-        } else {
-            heg = message.author
-        }
-      var mentionned = message.mentions.members.first();
-         var h;
-        if(mentionned) {
-            h = mentionned
-        } else {
-            h = message.member
-        }
-               moment.locale('ar-TN');
-      var id = new  Discord.RichEmbed()
-      .setAuthor(message.author.username, message.author.avatarURL) 
-    .setColor("#707070")
-    .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true) 
-    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)               
-    .setFooter(`Probot`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
-    .setThumbnail(heg.avatarURL);
-    message.channel.send(id)
-}       });
 
 
 
 
-client.on("message", message => {
-  if(message.author.bot) return;
-  if(!message.content.startsWith(prefix)) return;
-  if(message.content.startsWith(prefix + "avatar server")) {
-    let doma = new Discord.RichEmbed()
-    .setColor("BLACK")
-    .setAuthor(message.guild.name, message.guild.iconURL)
-    .setTitle("Avatar Link")
-    .setURL(message.guild.iconURL)
-    .setImage(message.guild.iconURL)
-    .setFooter(`Requested By ${message.author.tag}`, message.author.avatarURL)
-    message.channel.send(doma)
-  } else if(message.content.startsWith(prefix + "avatar")) {
-    let args = message.content.split(" ")[1]
-var avt = args || message.author.id;    
-    client.fetchUser(avt).then(user => {
-     avt = user;
-  let embed = new Discord.RichEmbed() 
-  .setColor("BLACK")
-  .setAuthor(`${avt.tag}`, avt.avatarURL)
-  .setTitle("Avatar Link")
-  .setURL(avt.avatarURL)
-  .setImage(avt.avatarURL)
-  .setFooter(`Requested By ${message.author.tag}`, message.author.avatarURL)
-  message.channel.send(embed) 
-    })
-  }
-})
+
+
+
+
 
 client.on('message', message => {
 if (message.content.startsWith(prefix + "uptime")) {
